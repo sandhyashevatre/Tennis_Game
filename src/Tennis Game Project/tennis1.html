@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Tennis1</title>
+
+	<style th:inline="text">
+		body {
+
+			text-align: center;
+
+			justify-content: center;
+
+			align-items: center;
+
+			height: 100vh;
+
+			margin: 0;
+
+			font-family: 'Times New Roman', Times, serif, sans-serif;
+
+			background-color: rgb(173, 216, 230);
+		}
+		
+		.container {
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  height: 100%;
+}
+						
+		  form {
+		    background-color: #fff;
+		    border-radius: 50px;
+		    padding: 50px;
+		    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+		    width: 400px;
+		    left: 1000px;
+		    position: center;
+		  }
+		
+		  label {
+		    display: block;
+		    font-weight: bold;
+		    margin-bottom: 2px;
+		    position: center;
+		  }
+		
+		  input[type="text"],
+		  input[type="number"] {
+		    width: 100%;
+		    padding: 10px;
+		    border: 1px solid #ccc;
+		    border-radius: 5px;
+		    margin-bottom: 15px;
+		  }
+		
+		  input[type="text"]:focus,
+		  input[type="number"]:focus {
+		    border-color: #3498db;
+		    outline: none;
+		  }
+		
+		  input[type="submit"] {
+		    background-color: #3498db;
+		    color: #fff;
+		    padding: 10px 20px;
+		    border: none;
+		    border-radius: 5px;
+		    cursor: pointer;
+		    font-weight: bold;
+		  }
+		
+		  input[type="submit"]:hover {
+		    background-color: #2980b9;
+		  }
+
+		/* Styles for Player names */
+		h2,
+		h3 {
+			font-size: 2em;
+			margin-bottom: 10px;
+			color: rgb(0, 0, 0);
+		}
+		/* Common styles for score paragraphs */
+		p {
+			font-size: 2em;
+			margin: 5px 0;
+		}
+
+		/* Styles for buttons */
+		button {
+			display: block;
+			font-size: 1.5em;
+			background-color: rgb(1, 0, 0);
+			color: rgb(243, 254, 56);
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			margin-top: 50px;
+			/* Add spacing between button and paragraphs */
+		}
+
+    /* Style for the Start Game button */
+    	.save-button {
+			position: relative;
+	        top: 10px;
+	        left: 130px;
+		
+	}
+    	.start-button {
+        /* Adjust these values to change the button position */
+        position: relative;
+        top: -20px;
+        left: 550px;
+    }
+		button:hover {
+			background-color: rgb(243, 254, 56);
+			color: rgb(1, 0, 0);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="details" id="Players Details">
+		<!-----------------------------'Playersdetails ------------------------------>
+		<h2> Tennis player details</h2><br>
+	<div class="container" id="Players Details">
+		<form action="/savePlayerDetails" method="post">
+			<label for="playerAName">Player 'A' Name :</label>
+			<input type="text" id="playerAName" name="playerAName" placeholder="Player 'A' Name">
+			
+			<label for="playerAID">Player 'A' ID :</label>
+			<input type="number" id="playerAID" name="playerAID" placeholder="Player 'A' ID">
+
+			<label for="playerBName">Player 'B' Name :</label>
+			<input type="text" id="playerBName" name="playerBName" placeholder="Player 'B' Name">
+
+			<label for="playerBID">Player 'B' ID :</label>
+			<input type="number" id="playerBID" name="playerBID" placeholder="Player 'B' ID">
+			
+				 <button type="submit" class="save-button">Save Details</button><br>
+		</form>
+	</div>
+			<p>Once you've saved the player details, click the button below to start the game !</p>	
+				<button class="start-button" onclick="parent.open('tennis2.html')">Start Game</button>
+	</div>
+
+</body>
+
+</html>

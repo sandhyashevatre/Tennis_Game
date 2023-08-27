@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Tennis2</title>
+	
+    <style th:inline="text">
+				body {
+
+			text-align: center;
+
+			justify-content: center;
+
+			align-items: center;
+
+			height: 100vh;
+
+			margin: 0;
+
+			font-family: 'Times New Roman', Times, serif, sans-serif;
+
+			background-color: rgb(173, 216, 230);
+		}
+/* Common styles for both Player score boxes */		    
+	   	.container {
+
+		    text-align: center;
+		    margin-top: 50px;
+		}
+
+	    table {
+	        border-collapse: collapse;
+	        width: 60%;
+	        margin: 10px auto;
+	    }
+	    th, td {
+	        border: 30px solid black;
+	        padding: 5px;
+	        text-align: center;
+	        font-size: 1.7em;
+	    }
+	    .reload {
+        font-family: "Lucida Sans Unicode";
+        border: rgb(191, 63, 156);
+        background-color: black;
+        cursor: pointer;
+        
+    }		
+		.PlayerABox, .PlayerBBox {
+		    display: inline-block;
+		    width: 45%; /* Adjust the width as needed */
+		    padding: 20px;
+		    background-color: rgb(255, 255, 255);
+		    color: rgb(243, 254, 56);
+		    border: 2px solid rgb(1, 0, 0);
+		    border-radius: 5px;
+		    font-size: 2em;
+		    margin: 10px; /* Add spacing between boxes */	   
+		}	
+		/* Styles for Player names */
+		h1 {
+		    font-size: 3em;
+		    margin-bottom: 10px;
+		    color: rgb(0, 0, 0);		    
+		}	
+		/* Common styles for score paragraphs */
+	
+		/* Styles for buttons */
+		button {
+		    display: block;
+		    width: 100%;
+		    padding: 10px;
+		    font-size: 1.5em;
+		    background-color: rgb(1, 0, 0);
+		    color: rgb(243, 254, 56);
+		    border: none;
+		    border-radius: 5px;
+		    cursor: pointer;
+		    transition: background-color 0.3s ease;
+		    margin-top: 10px; /* Add spacing between button and paragraphs */
+		}
+		.match-button		
+		 {
+	        text-align: center;
+	        margin-top: 20px;
+	        
+    }
+    	.button-container {
+	        text-align: center;
+	        margin-top: 600px;
+    }
+		button:hover {
+		    background-color: rgb(243, 254, 56);
+		    color: rgb(1, 0, 0);
+		}	
+    </style>
+</head>
+<body>
+<!--------------------------Player scores------------------------------ -->
+		<h1> Tennis Score Board </h1>
+<div class="container" id="scoreContainer">
+    <table>
+        <tr>
+            <th>Player</th>
+            <th>Points</th>
+            <th>Games</th>
+            <th>Sets</th>
+            <th>Save</th>
+        </tr>
+        <tr th:each="score : ${scores}" th:class="${score.PlayerA}Box">
+        
+            <td th:text="${score.PlayerA}">Player A</td>
+            <td th:text="'Points: ' + ${score.points}">0</td>
+            <td th:text="'Games: ' + ${score.games}">0</td>
+            <td th:text="'Sets: ' + ${score.sets}">0</td>
+            <td><button type="button" class="reload" th:onclick="'refreshScore(\'' + ${score.PlayerA} + '\')'">&#x21bb;</button></td>
+        </tr>
+        
+ 		<tr th:each="score : ${scores}" th:class="${score.PlayerB}Box">
+           
+            <td th:text="${score.PlayerB}">Player B</td>
+            <td th:text="'Points: ' + ${score.points}">0</td>
+            <td th:text="'Games: ' + ${score.games}">0</td>
+            <td th:text="'Sets: ' + ${score.sets}">0</td>
+            <td><button type="button" class="reload" th:onclick="'refreshScore(\'' + ${score.PlayerB} + '\')'">&#x21bb;</button></td>
+        </tr>
+    </table>  
+    <form action="/updateScore" method="post">
+        <input type="hidden" name="selectedPlayer.refresh" th:value="${selectedPlayer.refresh}">
+        <input type="hidden" name="points" th:value="${selectedPlayer.points + 15}">
+        <input type="hidden" name="games" th:value="${selectedPlayer.games + 1}">
+        <input type="hidden" name="sets" th:value="${selectedPlayer.sets}">
+        <button type="submit" class="match-button"> Save Match </button>
+    </form>
+</div>
+        <!-- Add button to reset scores -->
+        <form action="/resetScores" method="post">
+            <button type="submit" class="reset-button">Reset</button>
+        </form>
+    </div>
+
+    
+</body>
+</html>
